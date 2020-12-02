@@ -5,10 +5,7 @@ import takesix.api.ImmutableGameState;
 import takesix.api.ImmutablePlayerContext;
 import takesix.api.ImmutablePlayerState;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Engine {
@@ -20,10 +17,12 @@ public class Engine {
         status = Status.IN_PROGRESS;
     }
 
-    public void run() {
+    public GameResult run() {
         while (status != Status.GAME_FINISHED) {
             iterate();
         }
+
+        return GameResult.from(gameState);
     }
 
     private GameState initialize(Map<PlayerId, Player> players) {
@@ -65,8 +64,6 @@ public class Engine {
                 playTurn();
                 break;
         }
-
-        System.out.println(gameState);
     }
 
     private void playTurn() {
@@ -141,7 +138,7 @@ public class Engine {
 
     private void finishGame() {
         System.out.println("Game finished:");
-        System.out.println(gameState);
+        System.out.println(GameResult.from(gameState));
     }
 
 

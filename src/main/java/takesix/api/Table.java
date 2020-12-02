@@ -70,7 +70,7 @@ public class Table {
         return new Table(ImmutableList.of(row1, row2, row3, row4));
     }
 
-    List<Card> getRow(int index) {
+    public List<Card> getRow(int index) {
         return rows.get(index);
     }
 
